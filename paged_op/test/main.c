@@ -115,7 +115,7 @@ int main(int argc, char *argv[]){
             paged_op32_test_case(offset,size);
             if(checksum_ref!=checksum){
                 printf("\n--- offset=%u, size=%u\n",offset,size);
-                printx_dump_buf64("mem\n",mem,sizeof(mem));
+                printx32_dump_buf64("mem\n",mem,sizeof(mem),0);
                 assert(0);
             }
         }

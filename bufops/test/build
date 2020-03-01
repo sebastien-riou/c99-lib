@@ -4,3 +4,4 @@ set -e
 gcc -std=c99 -I ../inc main.c
 
 ./a.out
+rm a.out

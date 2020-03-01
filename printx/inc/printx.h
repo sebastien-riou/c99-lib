@@ -89,7 +89,7 @@ static size_t printx_cleanup_hexstr(char *hexstr, size_t hexstr_size, char *str,
 		char c = str[j];
 		if(printx_is_hexdigit(c)){
 			if(cnt==hexstr_size-1){//need final char for null.
-				printf("Too many hex digits. hexstr=%s\n",hexstr);
+				printx_printf("Too many hex digits. hexstr=%s\n",hexstr);
 				hexstr[cnt]=0;
 				return -1;
 			}
@@ -109,12 +109,12 @@ static size_t printx_user_hexstr_to_bytes(uint8_t*out, size_t out_size, char *st
 	return printx_hexstr_to_bytes(out,conv_size,str);
 }
 
-void printx_dump_buf(const char *msg,const void*const buf,size_t size,int bytes_per_word,int words_per_line){
+static void printx32_dump_buf(const char *msg,const void*const buf,size_t size,uint32_t base, int bytes_per_word,int words_per_line){
     const int bytes_per_line=bytes_per_word*words_per_line;
     const uint8_t*pos=(const uint8_t*)buf;
     printx_printf("%s",msg);
     for(int i=0;i<size/bytes_per_line;i++){
-        printx_printf("%08x: ",(uint32_t)(uintptr_t)(pos-(const uint8_t*const)buf));
+        printx_printf("%08x: ",base+(uint32_t)(uintptr_t)(pos-(const uint8_t*const)buf));
         for(int j=0;j<words_per_line;j++) {
             printx_bytes_sep("",pos,bytes_per_word," ","");
             pos+=bytes_per_word;
@@ -123,7 +123,7 @@ void printx_dump_buf(const char *msg,const void*const buf,size_t size,int bytes_
     }
     const int remaining = size%bytes_per_line;
     if(remaining){
-        printx_printf("%08x: ",(uint32_t)(uintptr_t)(pos-(const uint8_t*const)buf));
+        printx_printf("%08x: ",base+(uint32_t)(uintptr_t)(pos-(const uint8_t*const)buf));
         for(int j=0;j<remaining/bytes_per_word;j++) {
             printx_bytes_sep("",pos,bytes_per_word," ","");
             pos+=bytes_per_word;
@@ -134,15 +134,15 @@ void printx_dump_buf(const char *msg,const void*const buf,size_t size,int bytes_
         printx_printf("\n");
     }
 }
-void printx_dump_buf32(const char *msg,const void*const buf,size_t size){
+static void printx32_dump_buf32(const char *msg,const void*const buf,size_t size,uint32_t base){
     const int bytes_per_word=4;
     const int words_per_line=64/bytes_per_word;
-    printx_dump_buf(msg,buf,size,bytes_per_word,words_per_line);
+    printx32_dump_buf(msg,buf,size,base,bytes_per_word,words_per_line);
 }
-void printx_dump_buf64(const char *msg,const void*const buf,size_t size){
+static void printx32_dump_buf64(const char *msg,const void*const buf,size_t size,uint32_t base){
     const int bytes_per_word=8;
     const int words_per_line=64/bytes_per_word;
-    printx_dump_buf(msg,buf,size,bytes_per_word,words_per_line);
+    printx32_dump_buf(msg,buf,size,base,bytes_per_word,words_per_line);
 }
 
 static void printx_remove_unused_warnings(void){

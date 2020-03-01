@@ -3,6 +3,8 @@
 #include <stdio.h>
 #include <assert.h>
 
+#define HAS_ASSERT
+#define HAS_FPRINTF
 #include "paged_op.h"
 
 
@@ -12,8 +14,13 @@
 
 #include "printx.h"
 
-#define MEM_WORD_SIZE       1
-#define MEM_WORD_PER_PAGE   9
+#ifndef MEM_WORD_SIZE
+#define MEM_WORD_SIZE       8
+#endif
+#ifndef MEM_WORD_PER_PAGE
+#define MEM_WORD_PER_PAGE   4
+#endif
+
 #define MEM_PAGE_SIZE       (MEM_WORD_PER_PAGE*MEM_WORD_SIZE)
 #define MEM_PAGES           11
 #define MEM_SIZE            (MEM_PAGES*MEM_PAGE_SIZE)
@@ -92,32 +99,27 @@ static void paged_op32_test_case(uint32_t offset,uint32_t size){
 
 #define NUM_ELEMS(a) (sizeof(a)/sizeof 0[a])
 int main(int argc, char *argv[]){
+    printf("MEM_WORD_SIZE=%3u and MEM_WORD_PER_PAGE=%3u: ",MEM_WORD_SIZE,MEM_WORD_PER_PAGE);
+    fflush(stdout);
     uint8_t mem_ref[MEM_SIZE];
     srand(0);
     for(int i=0;i<MEM_SIZE;i++) mem_ref[i] = rand();
     memcpy(mem,mem_ref,MEM_SIZE);
     for(uint32_t offset = 0; offset < MEM_SIZE; offset++){
         for(uint32_t size = 0; size < MEM_SIZE-offset +1; size++){
-            printf("--- offset=%u, size=%u\n",offset,size);
+            //printf("--- offset=%u, size=%u\n",offset,size);
             checksum=0;
             process(mem_ref,offset,size);
             const uint64_t checksum_ref=checksum;
             checksum=0;
             paged_op32_test_case(offset,size);
             if(checksum_ref!=checksum){
-                printf("mem\n");
-                for(uint32_t p=0;p<MEM_PAGES;p++){
-                    printf("\t");
-                    for(uint32_t w=0;w<MEM_WORD_PER_PAGE;w++){
-                        uint64_t word = mem[p][w];
-                        printf("%016lx ",word);
-                    }
-                    printf("\n");
-                }
+                printf("\n--- offset=%u, size=%u\n",offset,size);
+                printx_dump_buf64("mem\n",mem,sizeof(mem));
                 assert(0);
             }
         }
     }
-    printx_dump_buf64("mem\n",mem,sizeof(mem));
+    //printx_dump_buf64("mem\n",mem,sizeof(mem));
     printf("TEST PASS\n");
 }

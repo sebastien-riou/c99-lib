@@ -60,6 +60,11 @@ static void paged_op32_dump(FILE*stream,const char *prefix,const paged_op32_t *o
 #endif
 
 static void paged_op32_compute(paged_op32_t *op, uint32_t offset, uint32_t size, uint32_t page_size, uint32_t granularity){
+    #ifdef HAS_ASSERT
+    assert(page_size>0);
+    assert(granularity>0);
+    assert(page_size>=granularity);
+    #endif
     if(0==size){
         op->first_page=0;
         op->first_size=0;
@@ -70,18 +75,21 @@ static void paged_op32_compute(paged_op32_t *op, uint32_t offset, uint32_t size,
         return;
     }
     uint32_t base_offset = offset;
-    uint32_t total_size = size;
-    paged_op32_match_granularity_range(&base_offset,&total_size,page_size);
+    paged_op32_match_granularity_lo(&base_offset,page_size);
     op->first_page = base_offset / page_size;
     const uint32_t first_offset = offset-base_offset;
     op->first_offset = first_offset;
-    op->first_size = page_size-first_offset;
+    if(size+op->first_offset > page_size) op->first_size = page_size-first_offset;
+    else op->first_size = size;
     paged_op32_match_granularity_range(&(op->first_offset),&(op->first_size),granularity);
     op->first_buf_offset = first_offset - op->first_offset;
-    op->first_buf_size = page_size - first_offset;
+    if(size+op->first_offset+op->first_buf_offset > page_size) op->first_buf_size = page_size - first_offset;
+    else op->first_buf_size = size;
     #ifdef HAS_ASSERT
     assert(op->first_buf_offset<op->first_size);
     assert(op->first_size>=op->first_buf_size);
+    if(size==1) assert(op->first_size<=granularity);
+    if(size<=granularity) assert(op->first_size<=2*granularity);
     #endif
     if(op->first_buf_size > size) op->first_buf_size = size;
     const uint32_t remaining = size - op->first_buf_size;

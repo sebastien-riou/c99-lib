@@ -1,6 +1,46 @@
 #!/bin/bash
 
 set -e
-gcc -std=c99 -I ../inc -I ../../printx/inc main.c
-
-./a.out
+gcc -std=c99 -I ../inc -I ../../printx/inc -DMEM_WORD_SIZE=1 -DMEM_WORD_PER_PAGE=1  main.c;./a.out
+gcc -std=c99 -I ../inc -I ../../printx/inc -DMEM_WORD_SIZE=1 -DMEM_WORD_PER_PAGE=2  main.c;./a.out
+gcc -std=c99 -I ../inc -I ../../printx/inc -DMEM_WORD_SIZE=1 -DMEM_WORD_PER_PAGE=3  main.c;./a.out
+gcc -std=c99 -I ../inc -I ../../printx/inc -DMEM_WORD_SIZE=1 -DMEM_WORD_PER_PAGE=4  main.c;./a.out
+gcc -std=c99 -I ../inc -I ../../printx/inc -DMEM_WORD_SIZE=2 -DMEM_WORD_PER_PAGE=1  main.c;./a.out
+gcc -std=c99 -I ../inc -I ../../printx/inc -DMEM_WORD_SIZE=2 -DMEM_WORD_PER_PAGE=2  main.c;./a.out
+gcc -std=c99 -I ../inc -I ../../printx/inc -DMEM_WORD_SIZE=2 -DMEM_WORD_PER_PAGE=3  main.c;./a.out
+gcc -std=c99 -I ../inc -I ../../printx/inc -DMEM_WORD_SIZE=2 -DMEM_WORD_PER_PAGE=4  main.c;./a.out
+gcc -std=c99 -I ../inc -I ../../printx/inc -DMEM_WORD_SIZE=2 -DMEM_WORD_PER_PAGE=5  main.c;./a.out
+gcc -std=c99 -I ../inc -I ../../printx/inc -DMEM_WORD_SIZE=4 -DMEM_WORD_PER_PAGE=1  main.c;./a.out
+gcc -std=c99 -I ../inc -I ../../printx/inc -DMEM_WORD_SIZE=4 -DMEM_WORD_PER_PAGE=2  main.c;./a.out
+gcc -std=c99 -I ../inc -I ../../printx/inc -DMEM_WORD_SIZE=4 -DMEM_WORD_PER_PAGE=3  main.c;./a.out
+gcc -std=c99 -I ../inc -I ../../printx/inc -DMEM_WORD_SIZE=4 -DMEM_WORD_PER_PAGE=4  main.c;./a.out
+gcc -std=c99 -I ../inc -I ../../printx/inc -DMEM_WORD_SIZE=4 -DMEM_WORD_PER_PAGE=5  main.c;./a.out
+gcc -std=c99 -I ../inc -I ../../printx/inc -DMEM_WORD_SIZE=4 -DMEM_WORD_PER_PAGE=6  main.c;./a.out
+gcc -std=c99 -I ../inc -I ../../printx/inc -DMEM_WORD_SIZE=4 -DMEM_WORD_PER_PAGE=7  main.c;./a.out
+gcc -std=c99 -I ../inc -I ../../printx/inc -DMEM_WORD_SIZE=4 -DMEM_WORD_PER_PAGE=8  main.c;./a.out
+gcc -std=c99 -I ../inc -I ../../printx/inc -DMEM_WORD_SIZE=4 -DMEM_WORD_PER_PAGE=9  main.c;./a.out
+gcc -std=c99 -I ../inc -I ../../printx/inc -DMEM_WORD_SIZE=4 -DMEM_WORD_PER_PAGE=10 main.c;./a.out
+gcc -std=c99 -I ../inc -I ../../printx/inc -DMEM_WORD_SIZE=4 -DMEM_WORD_PER_PAGE=11 main.c;./a.out
+gcc -std=c99 -I ../inc -I ../../printx/inc -DMEM_WORD_SIZE=4 -DMEM_WORD_PER_PAGE=12 main.c;./a.out
+gcc -std=c99 -I ../inc -I ../../printx/inc -DMEM_WORD_SIZE=4 -DMEM_WORD_PER_PAGE=13 main.c;./a.out
+gcc -std=c99 -I ../inc -I ../../printx/inc -DMEM_WORD_SIZE=4 -DMEM_WORD_PER_PAGE=14 main.c;./a.out
+gcc -std=c99 -I ../inc -I ../../printx/inc -DMEM_WORD_SIZE=4 -DMEM_WORD_PER_PAGE=15 main.c;./a.out
+gcc -std=c99 -I ../inc -I ../../printx/inc -DMEM_WORD_SIZE=4 -DMEM_WORD_PER_PAGE=16 main.c;./a.out
+gcc -std=c99 -I ../inc -I ../../printx/inc -DMEM_WORD_SIZE=8 -DMEM_WORD_PER_PAGE=1  main.c;./a.out
+gcc -std=c99 -I ../inc -I ../../printx/inc -DMEM_WORD_SIZE=8 -DMEM_WORD_PER_PAGE=2  main.c;./a.out
+gcc -std=c99 -I ../inc -I ../../printx/inc -DMEM_WORD_SIZE=8 -DMEM_WORD_PER_PAGE=3  main.c;./a.out
+gcc -std=c99 -I ../inc -I ../../printx/inc -DMEM_WORD_SIZE=8 -DMEM_WORD_PER_PAGE=4  main.c;./a.out
+gcc -std=c99 -I ../inc -I ../../printx/inc -DMEM_WORD_SIZE=8 -DMEM_WORD_PER_PAGE=5  main.c;./a.out
+gcc -std=c99 -I ../inc -I ../../printx/inc -DMEM_WORD_SIZE=8 -DMEM_WORD_PER_PAGE=6  main.c;./a.out
+gcc -std=c99 -I ../inc -I ../../printx/inc -DMEM_WORD_SIZE=8 -DMEM_WORD_PER_PAGE=7  main.c;./a.out
+gcc -std=c99 -I ../inc -I ../../printx/inc -DMEM_WORD_SIZE=8 -DMEM_WORD_PER_PAGE=8  main.c;./a.out
+gcc -std=c99 -I ../inc -I ../../printx/inc -DMEM_WORD_SIZE=8 -DMEM_WORD_PER_PAGE=9  main.c;./a.out
+gcc -std=c99 -I ../inc -I ../../printx/inc -DMEM_WORD_SIZE=8 -DMEM_WORD_PER_PAGE=10 main.c;./a.out
+gcc -std=c99 -I ../inc -I ../../printx/inc -DMEM_WORD_SIZE=8 -DMEM_WORD_PER_PAGE=11 main.c;./a.out
+gcc -std=c99 -I ../inc -I ../../printx/inc -DMEM_WORD_SIZE=8 -DMEM_WORD_PER_PAGE=12 main.c;./a.out
+gcc -std=c99 -I ../inc -I ../../printx/inc -DMEM_WORD_SIZE=8 -DMEM_WORD_PER_PAGE=13 main.c;./a.out
+gcc -std=c99 -I ../inc -I ../../printx/inc -DMEM_WORD_SIZE=8 -DMEM_WORD_PER_PAGE=14 main.c;./a.out
+gcc -std=c99 -I ../inc -I ../../printx/inc -DMEM_WORD_SIZE=8 -DMEM_WORD_PER_PAGE=15 main.c;./a.out
+gcc -std=c99 -I ../inc -I ../../printx/inc -DMEM_WORD_SIZE=8 -DMEM_WORD_PER_PAGE=16 main.c;./a.out
+gcc -std=c99 -I ../inc -I ../../printx/inc -DMEM_WORD_SIZE=8 -DMEM_WORD_PER_PAGE=17 main.c;./a.out
+rm a.out

@@ -66,12 +66,7 @@ static void paged_op32_compute(paged_op32_t *op, uint32_t offset, uint32_t size,
     assert(page_size>=granularity);
     #endif
     if(0==size){
-        op->first_page=0;
-        op->first_size=0;
-        op->first_buf_size=0;
-        op->last_page=0;
-        op->last_size=0;
-        op->last_buf_size=0;
+        memset(op,0,sizeof(paged_op32_t));
         return;
     }
     uint32_t base_offset = offset;
